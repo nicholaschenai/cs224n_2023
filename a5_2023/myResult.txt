@@ -1,0 +1,63 @@
+Note to self: they didnt give TEST set ground truth so it cant be evaluated
+
+2d
+
+VAL
+
+python src/run.py evaluate vanilla wiki.txt --reading_params_path vanilla.model.params --eval_corpus_path birth_dev.tsv --outputs_path vanilla.nopretrain.dev.predictions
+data has 418352 characters, 256 unique.
+number of parameters: 3323392
+500it [00:45, 10.87it/s]
+Correct: 6.0 out of 500.0: 1.2%
+
+TEST
+
+python src/run.py evaluate vanilla wiki.txt --reading_params_path vanilla.model.params --eval_corpus_path birth_test_inputs.tsv --outputs_path vanilla.nopretrain.test.predictions
+data has 418352 characters, 256 unique.
+number of parameters: 3323392
+437it [00:40, 10.85it/s]
+No gold birth places provided; returning (0,0)
+Predictions written to vanilla.nopretrain.test.predictions; no targets provided
+
+LONDON VAL
+
+python src\london_baseline.py
+Correct: 25.0 out of 500.0: 5.0%
+
+2f
+
+VAL
+
+python src/run.py evaluate vanilla wiki.txt --reading_params_path vanilla.finetune.params --eval_corpus_path birth_dev.tsv --outputs_path vanilla.pretrain.dev.predictions
+data has 418352 characters, 256 unique.
+number of parameters: 3323392
+500it [00:45, 10.98it/s]
+Correct: 103.0 out of 500.0: 20.599999999999998%
+
+TEST
+
+python src/run.py evaluate vanilla wiki.txt --reading_params_path vanilla.finetune.params --eval_corpus_path birth_test_inputs.tsv --outputs_path vanilla.pretrain.test.predictions
+data has 418352 characters, 256 unique.
+number of parameters: 3323392
+437it [00:40, 10.85it/s]
+No gold birth places provided; returning (0,0)
+Predictions written to vanilla.pretrain.test.predictions; no targets provided
+
+2g
+
+VAL
+
+python src/run.py evaluate perceiver wiki.txt --bottleneck_dim 64 --reading_params_path perceiver.finetune.params --eval_corpus_path birth_dev.tsv --outputs_path perceiver.pretrain.dev.predictions
+data has 418352 characters, 256 unique.
+number of parameters: 3339776
+500it [00:48, 10.26it/s]
+Correct: 65.0 out of 500.0: 13.0%
+
+TEST
+
+python src/run.py evaluate perceiver wiki.txt --bottleneck_dim 64 --reading_params_path perceiver.finetune.params --eval_corpus_path birth_test_inputs.tsv --outputs_path perceiver.pretrain.test.predictions
+data has 418352 characters, 256 unique.
+number of parameters: 3339776
+437it [00:42, 10.22it/s]
+No gold birth places provided; returning (0,0)
+Predictions written to perceiver.pretrain.test.predictions; no targets provided
